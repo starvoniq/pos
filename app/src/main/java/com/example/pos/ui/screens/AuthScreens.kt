@@ -1,5 +1,6 @@
 package com.example.pos.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -36,11 +37,16 @@ import com.example.pos.ui.theme.*
 @Composable
 fun LoginScreen(
     onLoginSuccess: (email: String, pass: String) -> Unit,
-    onNavigateToRegister: () -> Unit
+    onNavigateToRegister: () -> Unit,
+    onBackToSplash: () -> Unit
 ) {
     var email by remember { mutableStateOf("faith@store.com") }
     var password by remember { mutableStateOf("password123") }
     var passwordVisible by remember { mutableStateOf(false) }
+
+    BackHandler {
+        onBackToSplash()
+    }
 
     Box(
         modifier = Modifier
@@ -226,6 +232,10 @@ fun RegisterShopScreen(
     var email by remember { mutableStateOf("faith@store.com") }
     var category by remember { mutableStateOf("Groceries & Retail") }
     var address by remember { mutableStateOf("Plot 42, Biashara Street, Nairobi") }
+
+    BackHandler {
+        onBackToLogin()
+    }
 
     Box(
         modifier = Modifier

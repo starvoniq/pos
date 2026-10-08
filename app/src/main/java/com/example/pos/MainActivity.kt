@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onNavigateToRegister = {
                                 posViewModel.navigateTo("register_shop")
+                            },
+                            onBackToSplash = {
+                                posViewModel.navigateTo("splash")
                             }
                         )
                         "register_shop" -> RegisterShopScreen(

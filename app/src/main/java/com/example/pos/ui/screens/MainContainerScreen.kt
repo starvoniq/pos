@@ -1,5 +1,6 @@
 package com.example.pos.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
@@ -17,6 +18,24 @@ fun MainContainerScreen(
     var activeModal by remember { mutableStateOf<String?>(null) } // "payment", "add_product", "stock_in", "credit_sales", "expenses", "employees"
 
     val completedSale by viewModel.completedSale.collectAsState()
+
+    val isModalOpen = activeModal != null || completedSale != null
+    val isNotOnHome = selectedTab != 0
+
+    // Intercept Back Press to handle hierarchical back navigation:
+    // 1. Close active modal/dialog if open
+    // 2. Return to Dashboard (Home tab) if on another tab
+    // 3. Exit app only when on Dashboard with no modals open
+    BackHandler(enabled = isModalOpen || isNotOnHome) {
+        if (completedSale != null) {
+            viewModel.dismissReceiptModal()
+            activeModal = null
+        } else if (activeModal != null) {
+            activeModal = null
+        } else if (selectedTab != 0) {
+            viewModel.selectTab(0)
+        }
+    }
 
     // Show sale receipt modal when a sale completes
     if (completedSale != null) {
