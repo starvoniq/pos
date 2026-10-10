@@ -131,23 +131,26 @@ fun NewSaleScreen(
                 }
 
                 item {
-                    Spacer(modifier = Modifier.height(180.dp))
+                    Spacer(modifier = Modifier.height(200.dp))
                 }
             }
         }
 
-        // Bottom Fixed Summary Bar
+        // Sleek Floating Bezelled Summary Bar
         Surface(
             color = SurfaceDark,
-            tonalElevation = 12.dp,
+            shadowElevation = 16.dp,
+            shape = RoundedCornerShape(28.dp),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .border(1.dp, SurfaceBorder, RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                .padding(20.dp)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .border(1.dp, SurfaceBorder, RoundedCornerShape(28.dp))
+                .clip(RoundedCornerShape(28.dp))
         ) {
-            Column {
+            Column(
+                modifier = Modifier.padding(20.dp)
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
